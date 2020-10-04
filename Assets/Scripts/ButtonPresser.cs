@@ -20,6 +20,7 @@ public class ButtonPresser: MonoBehaviour
                     return;
                 }
                 button.IsPressed = true;
+                button.GetComponent<AudioSource>().Play();
 
                 foreach (var timedExecuter in button.ConnectedExecuters)
                 {

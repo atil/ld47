@@ -846,6 +846,7 @@ MonoBehaviour:
   - {fileID: 4214202988093086}
   - {fileID: 4908774125912330}
   _mouseLook: {fileID: 0}
+  InputEnabled: 1
 --- !u!114 &114722541770350444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,35 +864,17 @@ MonoBehaviour:
   MusicAudioSource: {fileID: 82729580898922134}
   GlitchAudioSource: {fileID: 1694618949}
   TimedBendAudioSource: {fileID: 0}
-  JumpClip: {fileID: 8300000, guid: 1353d3955b1ece044b757efd1434b192, type: 3}
-  LandClip: {fileID: 8300000, guid: d1b624bd9b024844d9f53258d3389590, type: 3}
+  JumpClip: {fileID: 8300000, guid: ecec9828942a4394daa24fd5cf1e7f75, type: 3}
+  LandClip: {fileID: 8300000, guid: 4db06683d371148439359f66c51bce8e, type: 3}
   LandFromHeightClip: {fileID: 8300000, guid: cb579912ec414aa4788695c1ba620d3a, type: 3}
-  BenderHit: {fileID: 8300000, guid: 6d8310a9c41f2c8429f0435e1a197c7e, type: 3}
-  BendClip: {fileID: 8300000, guid: 5eff22c1d3df58844ba8e3185ca90dd4, type: 3}
-  UnbendClip: {fileID: 8300000, guid: a3c3ade01e9b109469de0401cc83547a, type: 3}
-  EmptyFireClip: {fileID: 8300000, guid: 60c4c85c9e2032f4bb81dddcd7bbdb49, type: 3}
   ClickClip: {fileID: 8300000, guid: 58552358cdbb04b40a230c5919e0218a, type: 3}
-  TeleportClip: {fileID: 8300000, guid: 82c5807f6e584ae41880634e8b3988a4, type: 3}
-  AimBenderClip: {fileID: 8300000, guid: 3a70b264e1148484cb7b84aef0d18daf, type: 3}
-  AimGravityClip: {fileID: 8300000, guid: ad0cef4896675c24088d9d6fc5f4659b, type: 3}
-  CollectibleClip: {fileID: 8300000, guid: 897b4cf9f38d2f649a57f6374c11c86e, type: 3}
-  ButtonClip: {fileID: 8300000, guid: 237fa470ef640b94ab5693d9f3a20f6a, type: 3}
-  UiMessageClip: {fileID: 8300000, guid: 4ef8c6c04a8862b4cb8a35bab8e14833, type: 3}
-  JumpPadClip: {fileID: 8300000, guid: 4772bf8098441a74eadd4894e623f3f0, type: 3}
-  GravityClip: {fileID: 8300000, guid: 019a3e2b22b305f4d97da02ed154081c, type: 3}
-  GravityPickupClip: {fileID: 8300000, guid: 3c04abce7f9b5c94ab536ad897ea0a6f, type: 3}
-  GlitchClip1: {fileID: 8300000, guid: 86291f3379afc614bb91fa8168c7a9ff, type: 3}
-  GlitchClip2: {fileID: 8300000, guid: 3842fe777952a32418e0a38f5f60bb87, type: 3}
-  CheckpointClip: {fileID: 8300000, guid: b6d810ad822b81f48834da0e7ae32ade, type: 3}
-  ItemCollectClip: {fileID: 8300000, guid: 30a3986759bd90341bd9a1d662b30af3, type: 3}
-  ItemPlaceClip: {fileID: 8300000, guid: 30a3986759bd90341bd9a1d662b30af3, type: 3}
-  WeaponCollectClip: {fileID: 8300000, guid: 568bba1449a640a47b13553bb30c9caf, type: 3}
-  LevelStartClip: {fileID: 8300000, guid: b7eadccb7f1d3374c9e012820d671d1b, type: 3}
+  StoneFallClip: {fileID: 0}
+  StoneImpactClip: {fileID: 0}
+  StoneSlideClip: {fileID: 0}
   Footsteps:
-  - {fileID: 8300000, guid: fd142021ae56c234da57751bb4d6b11a, type: 3}
-  - {fileID: 8300000, guid: ed920f79346ab6e4fb4ea99592051bc4, type: 3}
-  - {fileID: 8300000, guid: ebed5dcf134f99f44a724e2f0ad1098d, type: 3}
-  - {fileID: 8300000, guid: e258afcf5b6e91647af48866365a4677, type: 3}
+  - {fileID: 8300000, guid: 0b11ec6f83d72134089d902516038e4a, type: 3}
+  - {fileID: 8300000, guid: dd9eca7fb7adae042b062ec9b8b5118a, type: 3}
+  - {fileID: 8300000, guid: 202666c5e880ca143b58fe30a25153a1, type: 3}
 --- !u!82 &82223581774592828
 AudioSource:
   m_ObjectHideFlags: 0
@@ -903,10 +886,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 0.6
+  m_PlayOnAwake: 0
+  m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

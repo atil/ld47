@@ -16,10 +16,14 @@ public class Game : MonoBehaviour
 
     private Ui _ui;
     private bool _isDead;
+    public bool IsDead => _isDead;
 
-    private void Start()
+    private IEnumerator Start()
     {
         _ui = FindObjectOfType<Ui>();
+        yield return StartCoroutine(_ui.FadeInCoroutine(1f));
+        yield return StartCoroutine(_ui.RunTextCoroutine());
+
     }
 
     public void OnTimerTrigger()
@@ -35,8 +39,13 @@ public class Game : MonoBehaviour
     private IEnumerator FallDownCoroutine()
     {
         _isDead = true;
-        StartCoroutine(_ui.FallDownCoroutine(2f));
-        yield return new WaitForSeconds(3f);
+
+        const string consoleText = "> subject #9108234789 terminated itself. fetching the next subject";
+
+        yield return StartCoroutine(_ui.FallDownCoroutine(2f));
+        yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
+
+        yield return new WaitForSeconds(1f);
 
         SceneManager.LoadScene("GameScene");
     }
@@ -49,10 +58,13 @@ public class Game : MonoBehaviour
     private IEnumerator SquishCoroutine()
     {
         _isDead = true;
-        FindObjectOfType<PlayerMotor>().enabled = false;
-        StartCoroutine(_ui.SquishCoroutine(3f));
-        yield return new WaitForSeconds(4f);
 
+        const string consoleText = "> subject #9108234789 terminated itself. fetching the next subject";
+
+        FindObjectOfType<PlayerMotor>().enabled = false;
+        yield return StartCoroutine(_ui.SquishCoroutine(2f));
+        yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("GameScene");
     }
 
@@ -64,10 +76,19 @@ public class Game : MonoBehaviour
     private IEnumerator EndCoroutine()
     {
         _isDead = true;
-        FindObjectOfType<PlayerMotor>().enabled = false;
-        StartCoroutine(FindObjectOfType<Ui>().EndCorutine(5f));
-        yield return new WaitForSeconds(5.1f);
-        SceneManager.LoadScene("EndScene");
+        
+        const string consoleText = "> subject #342987 passed the routine #40293847. preparing routine #91237894 ";
+
+        FindObjectOfType<PlayerMotor>().InputEnabled = false;
+        yield return StartCoroutine(_ui.EndCorutine(1f));
+        yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
+        yield return new WaitForSeconds(0.1f);
+
+        const string errorConsoleText = "> loading routine 0x000000 ERROR: MEMORY CORRUPTION. CASUALTY: 74092387 SUBJECTS. RELOADING THE SAME ROUTINE TO PREVENT FURTHER VIOLATIONS";
+        yield return StartCoroutine(_ui.ConsoleTextCoroutine(errorConsoleText, true));
+        yield return new WaitForSeconds(0.1f);
+
+        SceneManager.LoadScene("GameScene");
     }
 
     private void Update()
@@ -83,9 +104,11 @@ public class Game : MonoBehaviour
 
         _ui.SetGameTimer(_gameTimer / TimeLimit);
 
+#if UNITY_EDITOR
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("GameScene");
         }
+#endif
     }
 }

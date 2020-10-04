@@ -23,7 +23,11 @@ public class MouseLook : MonoBehaviour
     private const int FovMax = 110;
     private const int FovMin = 60;
 
+#if UNITY_WEBGL
+    private float _sensitivity = 70;
+#else
     private float _sensitivity = 220;
+#endif
     private float _zoomSensitivity = 30;
 
     private float _fov = 60;
@@ -52,7 +56,7 @@ public class MouseLook : MonoBehaviour
 
         if (!_isChangingGravity)
         {
-            _pitch += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime * (IsInverted ? 1 : -1);
+            _pitch += Input.GetAxis("Mouse Y") * sensitivity * dt * (IsInverted ? 1 : -1);
             _pitch = Mathf.Clamp(_pitch, -89, 89);
         }
 
@@ -69,6 +73,11 @@ public class MouseLook : MonoBehaviour
         else
         {
             _currentFov = _fov;
+        }
+
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            IsInverted = !IsInverted;
         }
     }
 

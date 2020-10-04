@@ -11,14 +11,17 @@ public class KeyFrame
     public float Duration = 2;
 }
 
-
+[RequireComponent(typeof(AudioSource))]
 public class Lerper : MonoBehaviour
 {
     public AnimationCurve LerpCurve;
 
     public List<KeyFrame> KeyFrames = new List<KeyFrame>();
 
+    [HideInInspector]
     public bool IsPlaying = false;
+
+    public bool PlaySfxAtEnd = false;
 
     public IEnumerator PlayAnimation(bool reverse)
     {
@@ -27,6 +30,15 @@ public class Lerper : MonoBehaviour
         if (reverse)
         {
             KeyFrames.Reverse();
+        }
+
+        Game game = FindObjectOfType<Game>();
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+
+        if (!PlaySfxAtEnd)
+        {
+            audioSource.Play();
         }
 
         for (int i = 0; i < KeyFrames.Count - 1; i++)
@@ -47,11 +59,23 @@ public class Lerper : MonoBehaviour
 
             transform.position = p2;
             transform.rotation = q2;
+
+            if (game.IsDead)
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(Sfx.Instance.StoneImpactClip); // TODO: Replace with death sound
+                yield break;
+            }
         }
 
         if (reverse)
         {
             KeyFrames.Reverse();
+        }
+
+        if (PlaySfxAtEnd)
+        {
+            audioSource.Play();
         }
 
         IsPlaying = false;
