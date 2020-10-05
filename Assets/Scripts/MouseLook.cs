@@ -79,6 +79,16 @@ public class MouseLook : MonoBehaviour
         {
             IsInverted = !IsInverted;
         }
+
+        if (Input.GetKeyDown(KeyCode.J))
+        {
+            _sensitivity -= 40f;
+        }
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            _sensitivity += 40f;
+        }
+
     }
 
     public void ResetAt(Transform t, Transform lookAt)

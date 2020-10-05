@@ -28,6 +28,7 @@ public class Ui : MonoBehaviour
     [Header("End")]
     public Color EndColor1;
     public Color EndColor2;
+    public Color EndError;
     public AnimationCurve EndAnimationCurve;
     public Image EndImage;
 
@@ -133,6 +134,10 @@ public class Ui : MonoBehaviour
 
         float charDuration = isError ? fastCharDuration : normalCharDuration;
         ConsoleText.color = isError ? TextColorError : TextColorNormal;
+        if (isError)
+        {
+            ConsoleText.fontSize *= 1.5f;
+        }
 
         foreach (char c in text)
         {
@@ -149,6 +154,15 @@ public class Ui : MonoBehaviour
             float t = GlitchCurve.Evaluate(f / duration);
             AnalogGlitch.colorDrift = Mathf.Lerp(0f, 0.25f, t);
             DigitalGlitch.intensity = Mathf.Lerp(0f, 0.25f, t);
+            yield return null;
+        }
+    }
+
+    public IEnumerator TimeoutCoroutine(float duration)
+    {
+        for (float f = 0; f < duration; f += Time.deltaTime)
+        {
+            FallDownImage.color = Color.Lerp(FallDownColor1, FallDownColor2, FallDownAnimationCurve.Evaluate(f / duration));
             yield return null;
         }
     }

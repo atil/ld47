@@ -67,6 +67,7 @@
     <Compile Include="Assets\Scripts\ButtonPresser.cs" />
     <Compile Include="Assets\Scripts\Carrier.cs" />
     <Compile Include="Assets\Scripts\Carryable.cs" />
+    <Compile Include="Assets\Scripts\CrosshairToggle.cs" />
     <Compile Include="Assets\Scripts\Drawing.cs" />
     <Compile Include="Assets\Scripts\EndTrigger.cs" />
     <Compile Include="Assets\Scripts\FallTrigger.cs" />

@@ -8,6 +8,8 @@ public class TimedExecuteInitTrigger: MonoBehaviour
 
     public bool ReverseAnimations = false;
 
+    public bool FreezePlayer = false;
+
     private bool _isTriggered = false;
 
     void OnTriggerEnter(Collider coll)
@@ -18,14 +20,15 @@ public class TimedExecuteInitTrigger: MonoBehaviour
 
             _isTriggered = true;
            foreach (TimedExecuter timedExecuter in ExecutersToInit)
-            {
-                if (timedExecuter == null)
-                {
-                    continue;
-                }
+           {
+               if (timedExecuter == null)
+               {
+                   continue;
+               }
 
-                StartCoroutine(timedExecuter.Init(ReverseAnimations));
-            }
+               StartCoroutine(timedExecuter.Init(ReverseAnimations));
+           }
+
         }
     }
 

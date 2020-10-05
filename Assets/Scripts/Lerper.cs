@@ -23,6 +23,8 @@ public class Lerper : MonoBehaviour
 
     public bool PlaySfxAtEnd = false;
 
+    public bool IsElevator = false;
+
     public IEnumerator PlayAnimation(bool reverse)
     {
         IsPlaying = true;
@@ -55,10 +57,10 @@ public class Lerper : MonoBehaviour
                 transform.position = Vector3.Lerp(p1, p2, t);
                 transform.rotation = Quaternion.Lerp(q1, q2, t);
 
-                if (game.IsDead)
+                if (game.IsDead && audioSource.isPlaying 
+                    && !(IsElevator && reverse)) // elevator sfx doesn't stop when going up
                 {
                     audioSource.Stop();
-                    yield break;
                 }
 
                 yield return null;
@@ -81,3 +83,4 @@ public class Lerper : MonoBehaviour
         IsPlaying = false;
     }
 }
+

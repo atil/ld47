@@ -37,6 +37,7 @@ public class Sfx : MonoBehaviour
     public AudioClip LandClip;
     public AudioClip LandFromHeightClip;
     public AudioClip ClickClip;
+    public AudioClip ButtonClip;
 
     [Space]
     public AudioClip StoneFallClip;
@@ -45,6 +46,8 @@ public class Sfx : MonoBehaviour
     public AudioClip SquishClip;
     public AudioClip EarthquakeClip;
     public AudioClip GlitchClip;
+    public AudioClip CarryableTakeClip;
+    public AudioClip CarryablePutClip;
 
     public List<AudioClip> Footsteps;
 
@@ -106,4 +109,18 @@ public class Sfx : MonoBehaviour
         OtherAudioSource.PlayOneShot(GlitchClip);
     }
 
+    public void CarryableTake()
+    {
+        OtherAudioSource.PlayOneShot(CarryableTakeClip);
+    }
+
+    public void CarryablePut()
+    {
+        OtherAudioSource.PlayOneShot(CarryablePutClip);
+    }
+
+    public void Button()
+    {
+        OtherAudioSource.PlayOneShot(ButtonClip);
+    }
 }

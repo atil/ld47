@@ -9,14 +9,17 @@ public class StartScene : MonoBehaviour
 
     private IEnumerator Start()
     {
+        Cursor.visible = false;
+
         string[] consoleText = 
         {
             "> booting system...\n",
             "> loading assets...\n",
             "> WARNING: missing textures detected\n",
+            "> loading environment...\n",
             "> WARNING: deadends detected\n",
-            "> fetching the first subject\n",
-            "> initiating procedure\n",
+            "> initiating procedure...\n",
+            "> fetching the next subject...\n",
         };
 
         foreach (string line in consoleText)

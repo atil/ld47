@@ -106,6 +106,8 @@ public class PlayerMotor : MonoBehaviour
     private void Start()
     {
         _ghostJumpRayPosition = _groundedRayPositions.Last();
+
+        StartCoroutine(CameraShakeCoroutine());
     }
 
 #if UNITY_EDITOR
@@ -158,7 +160,6 @@ public class PlayerMotor : MonoBehaviour
             _mouseLook.Tick(dt);
         }
 
-
         #region No clip
 #if CHEATS_ENABLED
         if (Input.GetKeyDown(KeyCode.RightAlt))
@@ -210,7 +211,11 @@ public class PlayerMotor : MonoBehaviour
         transform.SetParent(movingPlatform != null ? movingPlatform : null);
 
         transform.rotation = Quaternion.LookRotation(forward, Vector3.up);
-        
+
+        if (IsFrozen)
+        {
+            return;
+        }
 
         if (isGrounded) // Ground move
         {
@@ -256,11 +261,6 @@ public class PlayerMotor : MonoBehaviour
         }
 
         transform.position += displacement;
-
-        if (isGrounded && !_isGroundedInPrevFrame) // Just landed
-        {
-           
-        }
 
         var collisionDisplacement = ResolveCollisions(ref _velocity);
 
@@ -505,6 +505,28 @@ public class PlayerMotor : MonoBehaviour
     {
         transform.position = t.position;
         _velocity = Vector3.zero;
+    }
+
+    public bool IsShaking = false;
+    public bool IsFrozen;
+
+    private IEnumerator CameraShakeCoroutine()
+    {
+        Vector3 initPos = _camTransform.localPosition;
+        Vector3 targetPos;
+        while (true)
+        {
+            if (IsShaking)
+            {
+                targetPos = Random.onUnitSphere;
+                _camTransform.localPosition = Vector3.Lerp(_camTransform.localPosition, targetPos, Time.deltaTime * 20);
+            }
+            else
+            {
+                _camTransform.localPosition = initPos;
+            }
+            yield return null;
+        }
     }
 
 }

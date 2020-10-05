@@ -7,10 +7,12 @@ public class ButtonPresser: MonoBehaviour
 
     void Update()
     {
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
+        RaycastHit hit;
+
+
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width / 2f, Screen.height / 2f, 0f));
-            RaycastHit hit;
 
             if (Physics.Raycast(ray, out hit, ButtonReach, 1 << LayerMask.NameToLayer("Button")))
             {
@@ -20,11 +22,16 @@ public class ButtonPresser: MonoBehaviour
                     return;
                 }
                 button.IsPressed = true;
-                button.GetComponent<AudioSource>().Play();
+
                 if (button.PlayEarthquake)
                 {
                     Sfx.Instance.Earthquake();
+                    FindObjectOfType<PlayerMotor>().IsShaking = true;
+                    StartCoroutine(StopCameraShakeCoroutine());
                 }
+
+                Sfx.Instance.Button();
+                StartCoroutine(button.PlayPressAnim());
 
                 foreach (var timedExecuter in button.ConnectedExecuters)
                 {
@@ -32,6 +39,11 @@ public class ButtonPresser: MonoBehaviour
                 }
             }
         }
+    }
 
+    private IEnumerator StopCameraShakeCoroutine()
+    {
+        yield return new WaitForSeconds(17f);
+        FindObjectOfType<PlayerMotor>().IsShaking = false;
     }
 }
