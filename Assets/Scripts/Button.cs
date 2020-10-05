@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Button: MonoBehaviour
 {
+    public bool PlayEarthquake = false;
+
     public TimedExecuter[] ConnectedExecuters;
 
     public bool IsPressed;

@@ -21,6 +21,10 @@ public class ButtonPresser: MonoBehaviour
                 }
                 button.IsPressed = true;
                 button.GetComponent<AudioSource>().Play();
+                if (button.PlayEarthquake)
+                {
+                    Sfx.Instance.Earthquake();
+                }
 
                 foreach (var timedExecuter in button.ConnectedExecuters)
                 {

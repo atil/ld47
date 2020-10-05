@@ -417,6 +417,8 @@ public class PlayerMotor : MonoBehaviour
                     && Vector3.Dot(collisionNormal, Vector3.up) < -0.2)
                 {
                     FindObjectOfType<Game>().OnSquished();
+
+                    return Vector3.zero;
                 }
 
                 checkedColliderIndices.Add(i);

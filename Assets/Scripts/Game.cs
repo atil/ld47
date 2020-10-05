@@ -15,12 +15,16 @@ public class Game : MonoBehaviour
     private float _timerAfterTrigger;
 
     private Ui _ui;
-    private bool _isDead;
-    public bool IsDead => _isDead;
+    private int _subjectNumber;
+
+    public bool IsDead { get; private set; }
 
     private IEnumerator Start()
     {
+        _subjectNumber = UnityEngine.Random.Range(1000000, 9999999);
         _ui = FindObjectOfType<Ui>();
+        _ui.SetSubjectText(_subjectNumber);
+
         yield return StartCoroutine(_ui.FadeInCoroutine(1f));
         yield return StartCoroutine(_ui.RunTextCoroutine());
 
@@ -38,12 +42,13 @@ public class Game : MonoBehaviour
 
     private IEnumerator FallDownCoroutine()
     {
-        _isDead = true;
+        IsDead = true;
 
-        const string consoleText = "> subject #9108234789 terminated itself. fetching the next subject";
+        string consoleText = $"> subject #{_subjectNumber} terminated itself. fetching the next subject";
 
         yield return StartCoroutine(_ui.FallDownCoroutine(2f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
+        yield return StartCoroutine(_ui.GlitchCoroutine(0.5f));
 
         yield return new WaitForSeconds(1f);
 
@@ -57,11 +62,16 @@ public class Game : MonoBehaviour
 
     private IEnumerator SquishCoroutine()
     {
-        _isDead = true;
+        if (IsDead)
+        {
+            yield break;
+        }
+        IsDead = true;
 
-        const string consoleText = "> subject #9108234789 terminated itself. fetching the next subject";
+        string consoleText = $"> subject #{_subjectNumber} terminated itself. fetching the next subject";
 
-        FindObjectOfType<PlayerMotor>().enabled = false;
+        FindObjectOfType<PlayerMotor>().InputEnabled = false;
+        Sfx.Instance.Squish();
         yield return StartCoroutine(_ui.SquishCoroutine(2f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
         yield return new WaitForSeconds(1f);
@@ -75,25 +85,27 @@ public class Game : MonoBehaviour
 
     private IEnumerator EndCoroutine()
     {
-        _isDead = true;
+        IsDead = true;
         
-        const string consoleText = "> subject #342987 passed the routine #40293847. preparing routine #91237894 ";
+        string consoleText = $"> subject #{_subjectNumber} passed the routine #40293847. preparing routine #91237894 ";
 
         FindObjectOfType<PlayerMotor>().InputEnabled = false;
-        yield return StartCoroutine(_ui.EndCorutine(1f));
+        //yield return StartCoroutine(_ui.EndCorutine(1f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
         yield return new WaitForSeconds(0.1f);
 
-        const string errorConsoleText = "> loading routine 0x000000 ERROR: MEMORY CORRUPTION. CASUALTY: 74092387 SUBJECTS. RELOADING THE SAME ROUTINE TO PREVENT FURTHER VIOLATIONS";
+        const string errorConsoleText = "> loading routine 0x000000 ERROR: MEMORY CORRUPTION\n CASUALTY: 74092387 SUBJECTS\n RELOADING THE SAME ROUTINE TO PREVENT FURTHER VIOLATIONS";
+        Sfx.Instance.Glitch();
+        yield return StartCoroutine(_ui.GlitchCoroutine(1f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(errorConsoleText, true));
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene("GameScene");
     }
 
     private void Update()
     {
-        if (_isDead)
+        if (IsDead)
         {
             return;
         }

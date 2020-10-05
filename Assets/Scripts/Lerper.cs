@@ -54,18 +54,18 @@ public class Lerper : MonoBehaviour
                 float t = LerpCurve.Evaluate(f / duration);
                 transform.position = Vector3.Lerp(p1, p2, t);
                 transform.rotation = Quaternion.Lerp(q1, q2, t);
+
+                if (game.IsDead)
+                {
+                    audioSource.Stop();
+                    yield break;
+                }
+
                 yield return null;
             }
 
             transform.position = p2;
             transform.rotation = q2;
-
-            if (game.IsDead)
-            {
-                audioSource.Stop();
-                audioSource.PlayOneShot(Sfx.Instance.StoneImpactClip); // TODO: Replace with death sound
-                yield break;
-            }
         }
 
         if (reverse)

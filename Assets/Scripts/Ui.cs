@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 using TMPro;
+using Kino;
 
 public class Ui : MonoBehaviour
 {
@@ -22,10 +23,7 @@ public class Ui : MonoBehaviour
     public Color FallDownColor1;
     public Color FallDownColor2;
     public AnimationCurve FallDownAnimationCurve;
-
-
     public Image FallDownImage;
-
 
     [Header("End")]
     public Color EndColor1;
@@ -44,6 +42,17 @@ public class Ui : MonoBehaviour
 
     [Space]
     public TextMeshProUGUI RunText;
+
+    [Header("Glitch")]
+    public AnalogGlitch AnalogGlitch;
+    public DigitalGlitch DigitalGlitch;
+    public AnimationCurve GlitchCurve;
+    public TextMeshProUGUI SubjectText;
+
+    public void SetSubjectText(int subjectNumber)
+    {
+        SubjectText.text = "#" + subjectNumber.ToString();
+    }
 
     public void SetTriggerTimerText(float timer)
     {
@@ -131,5 +140,16 @@ public class Ui : MonoBehaviour
             yield return new WaitForSeconds(charDuration);
         }
 
+    }
+
+    public IEnumerator GlitchCoroutine(float duration)
+    {
+        for (float f = 0; f < duration; f += Time.deltaTime)
+        {
+            float t = GlitchCurve.Evaluate(f / duration);
+            AnalogGlitch.colorDrift = Mathf.Lerp(0f, 0.25f, t);
+            DigitalGlitch.intensity = Mathf.Lerp(0f, 0.25f, t);
+            yield return null;
+        }
     }
 }

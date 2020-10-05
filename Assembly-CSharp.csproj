@@ -69,7 +69,6 @@
     <Compile Include="Assets\Scripts\Carryable.cs" />
     <Compile Include="Assets\Scripts\Drawing.cs" />
     <Compile Include="Assets\Scripts\EndTrigger.cs" />
-    <Compile Include="Assets\Scripts\EndUi.cs" />
     <Compile Include="Assets\Scripts\FallTrigger.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\Gravity.cs" />
@@ -79,6 +78,7 @@
     <Compile Include="Assets\Scripts\MovingPlatform.cs" />
     <Compile Include="Assets\Scripts\PlayerMotor.cs" />
     <Compile Include="Assets\Scripts\Sfx.cs" />
+    <Compile Include="Assets\Scripts\StartScene.cs" />
     <Compile Include="Assets\Scripts\TimedExecuteInitTrigger.cs" />
     <Compile Include="Assets\Scripts\TimedExecuter.cs" />
     <Compile Include="Assets\Scripts\Ui.cs" />
@@ -667,7 +667,12 @@
       <HintPath>C:/Users/atil/code/LD47/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{383C8CB3-D8A3-09E4-3254-53258A65BFF0}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

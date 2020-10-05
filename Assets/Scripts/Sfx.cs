@@ -42,6 +42,9 @@ public class Sfx : MonoBehaviour
     public AudioClip StoneFallClip;
     public AudioClip StoneImpactClip;
     public AudioClip StoneSlideClip;
+    public AudioClip SquishClip;
+    public AudioClip EarthquakeClip;
+    public AudioClip GlitchClip;
 
     public List<AudioClip> Footsteps;
 
@@ -83,9 +86,24 @@ public class Sfx : MonoBehaviour
         Footsteps.Add(playedSound);
     }
 
+    public void Squish()
+    {
+        OtherAudioSource.PlayOneShot(SquishClip);
+    }
 
     public void Click()
     {
         OtherAudioSource.PlayOneShot(ClickClip);
     }
+
+    public void Earthquake()
+    {
+        OtherAudioSource.PlayOneShot(EarthquakeClip);
+    }
+
+    public void Glitch()
+    {
+        OtherAudioSource.PlayOneShot(GlitchClip);
+    }
+
 }

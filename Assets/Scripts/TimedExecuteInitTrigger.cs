@@ -17,14 +17,14 @@ public class TimedExecuteInitTrigger: MonoBehaviour
             FindObjectOfType<Game>().OnTimerTrigger();
 
             _isTriggered = true;
-            for (int i = 0; i < ExecutersToInit.Length; i++)
+           foreach (TimedExecuter timedExecuter in ExecutersToInit)
             {
-                StartCoroutine(ExecutersToInit[i].Init(ReverseAnimations));
-            }
+                if (timedExecuter == null)
+                {
+                    continue;
+                }
 
-            foreach (TimedExecuter timedExecuter in ExecutersToInit)
-            {
-                timedExecuter.Init();
+                StartCoroutine(timedExecuter.Init(ReverseAnimations));
             }
         }
     }
