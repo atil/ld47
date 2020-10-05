@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class StartScene : MonoBehaviour
 {
     public TextMeshProUGUI ConsoleText;
+    public AudioSource BlipAudioSource;
 
     private IEnumerator Start()
     {
@@ -27,6 +28,7 @@ public class StartScene : MonoBehaviour
             foreach (char ch in line)
             {
                 ConsoleText.text += ch;
+                BlipAudioSource.Play();
                 yield return new WaitForSeconds(0.05f);
             }
 

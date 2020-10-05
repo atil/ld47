@@ -50,6 +50,8 @@ public class Ui : MonoBehaviour
     public AnimationCurve GlitchCurve;
     public TextMeshProUGUI SubjectText;
 
+    public AudioSource BlipAudioSource;
+
     public void SetSubjectText(int subjectNumber)
     {
         SubjectText.text = "#" + subjectNumber.ToString();
@@ -142,6 +144,7 @@ public class Ui : MonoBehaviour
         foreach (char c in text)
         {
             ConsoleText.text += c;
+            BlipAudioSource.Play();
             yield return new WaitForSeconds(charDuration);
         }
 

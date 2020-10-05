@@ -77,6 +77,7 @@
     <Compile Include="Assets\Scripts\LetterBillboard.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\MovingPlatform.cs" />
+    <Compile Include="Assets\Scripts\Music.cs" />
     <Compile Include="Assets\Scripts\PlayerMotor.cs" />
     <Compile Include="Assets\Scripts\Sfx.cs" />
     <Compile Include="Assets\Scripts\StartScene.cs" />

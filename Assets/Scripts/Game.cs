@@ -46,6 +46,7 @@ public class Game : MonoBehaviour
 
         string consoleText = $"> subject #{_subjectNumber} terminated itself. fetching the next subject...";
 
+        FindObjectOfType<Music>().FadeOut(1f);
         yield return StartCoroutine(_ui.FallDownCoroutine(2f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
         yield return StartCoroutine(_ui.GlitchCoroutine(0.5f));
@@ -70,6 +71,7 @@ public class Game : MonoBehaviour
 
         string consoleText = $"> subject #{_subjectNumber} terminated itself. fetching the next subject...";
 
+        FindObjectOfType<Music>().Stop();
         FindObjectOfType<PlayerMotor>().InputEnabled = false;
         Sfx.Instance.Squish();
         yield return StartCoroutine(_ui.SquishCoroutine(2f));
@@ -94,6 +96,7 @@ public class Game : MonoBehaviour
         
         string consoleText = $"> subject #{_subjectNumber} passed the routine #40293847 with score of {_gameTimer:F2} secs. preparing routine #91237894 ";
 
+        FindObjectOfType<Music>().FadeOut(1f);
         //FindObjectOfType<PlayerMotor>().enabled = false;
         //yield return StartCoroutine(_ui.EndCorutine(1f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
@@ -119,6 +122,7 @@ public class Game : MonoBehaviour
         IsDead = true;
         string consoleText = $"> subject #{_subjectNumber} timed out and has been terminated. fetching the next subject...";
         FindObjectOfType<PlayerMotor>().InputEnabled = false;
+        FindObjectOfType<Music>().FadeOut(1f);
         yield return StartCoroutine(_ui.TimeoutCoroutine(2f));
         yield return StartCoroutine(_ui.ConsoleTextCoroutine(consoleText, false));
         yield return new WaitForSeconds(1f);
